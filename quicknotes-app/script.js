@@ -7,8 +7,31 @@ const searchInput = document.querySelector("#search-input");
 const noteCount = document.querySelector("#note-count");
 const noteList = document.querySelector("#note-list");
 
-// In-memory notes array
-let notes = [];
+// LocalStorage key
+const STORAGE_KEY = "quicknotes_app_data";
+
+// Load saved notes from localStorage or initialize empty array
+let notes = loadNotes();
+
+// Load notes from localStorage using JSON.parse
+function loadNotes() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (err) {
+    console.error("Error loading notes from localStorage:", err);
+    return [];
+  }
+}
+
+// Save notes to localStorage using JSON.stringify
+function saveNotes() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  } catch (err) {
+    console.error("Error saving notes to localStorage:", err);
+  }
+}
 
 // Format timestamps for display
 function formatDate(isoString) {
@@ -36,7 +59,7 @@ function updateCount(count) {
   }
 }
 
-// Validate input text
+// Validate input text (empty or > 200 characters)
 function validateNoteText(text) {
   const trimmed = text.trim();
   if (trimmed.length === 0) {
@@ -51,8 +74,8 @@ function validateNoteText(text) {
   return true;
 }
 
-// Render the list of notes into the DOM
-function render(notesToRender = notes) {
+// Render notes list into the DOM using createElement and textContent
+function render(notesToRender = getVisibleNotes()) {
   if (!noteList || !noteCount) return;
 
   noteList.innerHTML = "";
@@ -61,7 +84,10 @@ function render(notesToRender = notes) {
   if (notesToRender.length === 0) {
     const emptyLi = document.createElement("li");
     emptyLi.className = "empty-notes-hint";
-    emptyLi.textContent = "No notes yet. Add your first note above!";
+    const query = searchInput ? searchInput.value.trim() : "";
+    emptyLi.textContent = query !== ""
+      ? "No notes found matching your search."
+      : "No notes yet. Add your first note above!";
     noteList.appendChild(emptyLi);
     return;
   }
@@ -69,6 +95,7 @@ function render(notesToRender = notes) {
   notesToRender.forEach((note) => {
     const li = document.createElement("li");
     li.className = `note-card ${note.category} category-${note.category}`;
+    li.dataset.id = note.id;
 
     const bodyDiv = document.createElement("div");
     bodyDiv.className = "note-body";
@@ -100,11 +127,25 @@ function render(notesToRender = notes) {
     deleteBtn.className = "delete-btn";
     deleteBtn.type = "button";
     deleteBtn.textContent = "Delete";
+    deleteBtn.setAttribute("aria-label", `Delete note: ${note.text.slice(0, 20)}`);
     deleteBtn.addEventListener("click", () => deleteNote(note.id));
 
     li.appendChild(bodyDiv);
     li.appendChild(deleteBtn);
     noteList.appendChild(li);
+  });
+}
+
+// Filter notes based on active search input query
+function getVisibleNotes() {
+  if (!searchInput) return notes;
+  const term = searchInput.value.trim().toLowerCase();
+  if (term === "") return notes;
+
+  return notes.filter((note) => {
+    const textMatch = note.text.toLowerCase().includes(term);
+    const categoryMatch = note.category.toLowerCase().includes(term);
+    return textMatch || categoryMatch;
   });
 }
 
@@ -122,6 +163,7 @@ function addNote(text, category) {
   };
 
   notes.unshift(newNote);
+  saveNotes();
   render();
   return true;
 }
@@ -129,6 +171,7 @@ function addNote(text, category) {
 // Delete note by id
 function deleteNote(id) {
   notes = notes.filter((n) => n.id !== id && n.id !== Number(id));
+  saveNotes();
   render();
 }
 
@@ -152,5 +195,12 @@ if (noteForm && noteInput) {
   });
 }
 
-// Initial render
+// Live search listener
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    render();
+  });
+}
+
+// Initial render from loaded localStorage data
 render();
