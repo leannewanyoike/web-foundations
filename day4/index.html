@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Character Counter and Dark Mode</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <main class="app-card">
+        <header class="card-header">
+            <div>
+                <h1 class="card-title">Live Character Counter</h1>
+                <p class="card-subtitle">Keep track of your text length and words in real time</p>
+            </div>
+            <button id="theme-toggle" type="button" aria-label="Toggle color theme">Dark mode</button>
+        </header>
+
+        <section class="editor-section">
+            <label for="note-text" class="field-label">Your Note</label>
+            <textarea 
+                id="note-text" 
+                name="note-text" 
+                rows="8" 
+                placeholder="Start typing your note here... (Esc to clear)"></textarea>
+        </section>
+
+        <section class="meta-section">
+            <div class="stats-group">
+                <p id="char-count" class="counter-badge">0 / 200 characters</p>
+                <p id="word-count" class="counter-badge">0 words</p>
+            </div>
+            <div class="actions-group">
+                <button id="clear-btn" type="button">Clear</button>
+            </div>
+        </section>
+
+        <footer class="card-footer">
+            <p class="hint-text">Shortcuts: Press <kbd>Esc</kbd> while typing to clear text</p>
+        </footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,256 @@
+/* ==========================================================================
+   CSS Custom Properties (Variables)
+   ========================================================================== */
+
+:root {
+  --bg-color: #f1f5f9;
+  --card-bg: #ffffff;
+  --text-color: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --border-focus: #3b82f6;
+  --focus-ring: rgba(59, 130, 246, 0.25);
+  
+  --btn-bg: #e2e8f0;
+  --btn-text: #1e293b;
+  --btn-hover: #cbd5e1;
+  
+  --clear-btn-bg: #fee2e2;
+  --clear-btn-text: #b91c1c;
+  --clear-btn-hover: #fecaca;
+  
+  --badge-bg: #f8fafc;
+  --badge-border: #e2e8f0;
+  --kbd-bg: #e2e8f0;
+  --kbd-text: #475569;
+  
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  color-scheme: light;
+}
+
+body.dark {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-color: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --border-focus: #60a5fa;
+  --focus-ring: rgba(96, 165, 250, 0.3);
+  
+  --btn-bg: #334155;
+  --btn-text: #f8fafc;
+  --btn-hover: #475569;
+  
+  --clear-btn-bg: #450a0a;
+  --clear-btn-text: #fca5a5;
+  --clear-btn-hover: #7f1d1d;
+  
+  --badge-bg: #0f172a;
+  --badge-border: #334155;
+  --kbd-bg: #334155;
+  --kbd-text: #cbd5e1;
+  
+  --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   Character Counter State Classes
+   ========================================================================== */
+
+.warning {
+  color: orange;
+}
+
+.over {
+  color: red;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Base Layout & Typography
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ==========================================================================
+   App Card Component
+   ========================================================================== */
+
+.app-card {
+  width: 100%;
+  max-width: 640px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Form Controls
+   ========================================================================== */
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+textarea#note-text {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+textarea#note-text:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* ==========================================================================
+   Meta & Counters Section
+   ========================================================================== */
+
+.meta-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stats-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.counter-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  background-color: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+#theme-toggle {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  white-space: nowrap;
+}
+
+#theme-toggle:hover {
+  background-color: var(--btn-hover);
+}
+
+#clear-btn {
+  background-color: var(--clear-btn-bg);
+  color: var(--clear-btn-text);
+}
+
+#clear-btn:hover {
+  background-color: var(--clear-btn-hover);
+}
+
+/* ==========================================================================
+   Footer & Hints
+   ========================================================================== */
+
+.card-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 600;
+  background-color: var(--kbd-bg);
+  color: var(--kbd-text);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
