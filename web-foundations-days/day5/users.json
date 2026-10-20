@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Lilian Wanyoike",
+    "email": "lilian.wanyoike@totalsolutions.co.ke",
+    "address": { "city": "Nairobi" },
+    "company": { "name": "Total Solutions Ltd" }
+  },
+  {
+    "id": 2,
+    "name": "James Mwangi",
+    "email": "james.mwangi@equitybank.co.ke",
+    "address": { "city": "Nairobi" },
+    "company": { "name": "Equity Bank Kenya" }
+  },
+  {
+    "id": 3,
+    "name": "Amina Hassan",
+    "email": "amina.hassan@kenyapower.co.ke",
+    "address": { "city": "Mombasa" },
+    "company": { "name": "Kenya Power & Lighting" }
+  },
+  {
+    "id": 4,
+    "name": "Brian Otieno",
+    "email": "brian.otieno@safaricom.co.ke",
+    "address": { "city": "Kisumu" },
+    "company": { "name": "Safaricom PLC" }
+  },
+  {
+    "id": 5,
+    "name": "Grace Njeri",
+    "email": "grace.njeri@kenya-airways.com",
+    "address": { "city": "Nairobi" },
+    "company": { "name": "Kenya Airways" }
+  },
+  {
+    "id": 6,
+    "name": "David Kamau",
+    "email": "david.kamau@nbk.co.ke",
+    "address": { "city": "Nakuru" },
+    "company": { "name": "National Bank of Kenya" }
+  },
+  {
+    "id": 7,
+    "name": "Faith Achieng",
+    "email": "faith.achieng@mpesa-africa.co.ke",
+    "address": { "city": "Eldoret" },
+    "company": { "name": "M-Pesa Africa" }
+  },
+  {
+    "id": 8,
+    "name": "Peter Kariuki",
+    "email": "peter.kariuki@javahouseafrica.com",
+    "address": { "city": "Thika" },
+    "company": { "name": "Java House Africa" }
+  },
+  {
+    "id": 9,
+    "name": "Mercy Wambui",
+    "email": "mercy.wambui@kra.go.ke",
+    "address": { "city": "Nyeri" },
+    "company": { "name": "Kenya Revenue Authority" }
+  },
+  {
+    "id": 10,
+    "name": "Samuel Mutua",
+    "email": "samuel.mutua@cbagroup.co.ke",
+    "address": { "city": "Nairobi" },
+    "company": { "name": "NCBA Group" }
+  }
+]

@@ -4,7 +4,7 @@ const filterInput = document.querySelector("#filter-input");
 const statusEl    = document.querySelector("#status");
 const usersList   = document.querySelector("#users-list");
 
-const API_URL = "https://jsonplaceholder.typicode.com/users";
+const API_URL = "./users.json";
 
 // In-memory store for the full user array loaded from the server
 let allUsers = [];
