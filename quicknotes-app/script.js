@@ -33,19 +33,16 @@ function saveNotes() {
   }
 }
 
-// Format timestamps for display
-function formatDate(isoString) {
-  try {
-    const date = new Date(isoString);
-    return date.toLocaleDateString(undefined, {
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-  } catch {
-    return "";
-  }
+// Generate a readable date and time string
+function getReadableDateTime() {
+  const now = new Date();
+  return now.toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
 }
 
 // Update the note count message for zero, one, and many notes
@@ -100,7 +97,7 @@ function render(notesToRender = getVisibleNotes()) {
     const bodyDiv = document.createElement("div");
     bodyDiv.className = "note-body";
 
-    // Text content using textContent (never innerHTML for user text)
+    // Note text using textContent (never innerHTML for user text)
     const textP = document.createElement("p");
     textP.className = "note-text";
     textP.textContent = note.text;
@@ -108,13 +105,15 @@ function render(notesToRender = getVisibleNotes()) {
     const metaDiv = document.createElement("div");
     metaDiv.className = "note-meta";
 
+    // Small category label
     const badge = document.createElement("span");
     badge.className = "category-badge";
     badge.textContent = note.category;
 
+    // Readable date and time
     const date = document.createElement("time");
     date.className = "note-date";
-    date.textContent = formatDate(note.createdAt);
+    date.textContent = note.createdAt;
 
     metaDiv.appendChild(badge);
     metaDiv.appendChild(date);
@@ -149,7 +148,7 @@ function getVisibleNotes() {
   });
 }
 
-// Add a new note
+// Add a new note with id, text, category, and createdAt (readable date and time)
 function addNote(text, category) {
   if (!validateNoteText(text)) {
     return false;
@@ -164,7 +163,7 @@ function addNote(text, category) {
     id: id,
     text: text.trim(),
     category: category || "personal",
-    createdAt: new Date().toISOString()
+    createdAt: getReadableDateTime()
   };
 
   notes.unshift(newNote);
