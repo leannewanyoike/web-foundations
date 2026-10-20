@@ -1,0 +1,487 @@
+/* ==========================================================================
+   QuickNotes - Modern Card-Based Design System
+   ========================================================================== */
+
+:root {
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-focus: rgba(13, 148, 136, 0.25);
+  
+  --bg-page: #f8fafc;
+  --card-bg: #ffffff;
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --border-focus: #0d9488;
+  
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-bg: #fee2e2;
+  --danger-text: #b91c1c;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  
+  /* Category Colors */
+  --personal-border: #3b82f6;
+  --personal-bg: #eff6ff;
+  --personal-badge: #dbeafe;
+  --personal-text: #1e40af;
+  
+  --work-border: #f59e0b;
+  --work-bg: #fffbeb;
+  --work-badge: #fef3c7;
+  --work-text: #92400e;
+  
+  --study-border: #10b981;
+  --study-bg: #f0fdf4;
+  --study-badge: #dcfce7;
+  --study-text: #166534;
+}
+
+/* ==========================================================================
+   Base & Reset
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Header & Tagline
+   ========================================================================== */
+
+.app-header {
+  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+  color: #ffffff;
+  padding: 2.25rem 1.5rem;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.header-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.app-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
+}
+
+.app-tagline {
+  font-size: 1rem;
+  color: #ccfbf1;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Main Content Layout
+   ========================================================================== */
+
+.app-main {
+  flex: 1;
+  max-width: 680px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.card-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-md);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   Flexbox Form & Input Controls
+   ========================================================================== */
+
+#note-form {
+  display: flex;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label,
+.search-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-group-input {
+  flex: 1 1 240px;
+}
+
+.form-group-category {
+  flex: 0 1 140px;
+}
+
+.form-actions {
+  flex: 0 0 auto;
+}
+
+input[type="text"],
+input[type="search"],
+select {
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-focus);
+}
+
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 1rem;
+  appearance: none;
+  padding-right: 2rem;
+}
+
+/* ==========================================================================
+   Buttons & Visible :hover Styles
+   ========================================================================== */
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem 1.25rem;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+#add-btn {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2);
+}
+
+#add-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(13, 148, 136, 0.3);
+}
+
+#add-btn:active {
+  transform: translateY(0);
+}
+
+.delete-btn {
+  background-color: transparent;
+  color: var(--danger-text);
+  border: 1px solid transparent;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  border-radius: 6px;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-bg);
+  border-color: #fca5a5;
+  color: var(--danger-hover);
+}
+
+/* ==========================================================================
+   Validation Error Message
+   ========================================================================== */
+
+.error-message {
+  color: var(--danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.75rem;
+  min-height: 1.25rem;
+}
+
+/* ==========================================================================
+   Notes Section & Search
+   ========================================================================== */
+
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+}
+
+.notes-header .section-title {
+  margin-bottom: 0;
+}
+
+.search-container {
+  flex: 0 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.search-label {
+  font-size: 0.75rem;
+}
+
+.note-count {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   Note Cards (Padding, Border, Border-Radius, Margin)
+   ========================================================================== */
+
+.notes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card,
+.note,
+.notes-list li {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-bottom: 0.875rem;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.note-card:hover,
+.note:hover,
+.notes-list li:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.note-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.note-text {
+  font-size: 0.975rem;
+  color: var(--text-main);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.category-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+}
+
+/* ==========================================================================
+   Visual Styles for Each Category (Classes)
+   ========================================================================== */
+
+/* Personal Category */
+.category-personal,
+.personal,
+.note-card.personal,
+.note-card.category-personal {
+  background-color: var(--personal-bg);
+  border-left: 5px solid var(--personal-border);
+}
+
+.category-personal .category-badge,
+.personal .category-badge {
+  background-color: var(--personal-badge);
+  color: var(--personal-text);
+}
+
+/* Work Category */
+.category-work,
+.work,
+.note-card.work,
+.note-card.category-work {
+  background-color: var(--work-bg);
+  border-left: 5px solid var(--work-border);
+}
+
+.category-work .category-badge,
+.work .category-badge {
+  background-color: var(--work-badge);
+  color: var(--work-text);
+}
+
+/* Study Category */
+.category-study,
+.study,
+.note-card.study,
+.note-card.category-study {
+  background-color: var(--study-bg);
+  border-left: 5px solid var(--study-border);
+}
+
+.category-study .category-badge,
+.study .category-badge {
+  background-color: var(--study-badge);
+  color: var(--study-text);
+}
+
+/* Empty notes state */
+.empty-notes-hint {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.app-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  background-color: #ffffff;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Media Query (Small Screens <= 600px)
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .app-header {
+    padding: 1.75rem 1rem;
+  }
+
+  .app-title {
+    font-size: 1.75rem;
+  }
+
+  .app-main {
+    margin: 1.25rem auto;
+    padding: 0 0.875rem;
+    gap: 1.25rem;
+  }
+
+  .card-section {
+    padding: 1.25rem;
+  }
+
+  #note-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .form-group-input,
+  .form-group-category,
+  .form-actions {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  #add-btn {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .notes-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.875rem;
+  }
+
+  .search-container {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .note-card,
+  .note,
+  .notes-list li {
+    padding: 0.875rem 1rem;
+  }
+}
