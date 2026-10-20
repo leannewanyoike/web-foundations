@@ -48,7 +48,7 @@ function getReadableDateTime() {
 // Update the note count message for zero, one, and many notes
 function updateCount(count) {
   if (count === 0) {
-    noteCount.textContent = "You have 0 notes.";
+    noteCount.textContent = "You have no notes yet.";
   } else if (count === 1) {
     noteCount.textContent = "You have 1 note.";
   } else {
@@ -60,11 +60,11 @@ function updateCount(count) {
 function validateNoteText(text) {
   const trimmed = text.trim();
   if (trimmed.length === 0) {
-    errorMessage.textContent = "Note cannot be empty.";
+    errorMessage.textContent = "Please type a note first.";
     return false;
   }
   if (trimmed.length > 200) {
-    errorMessage.textContent = "Note cannot exceed 200 characters.";
+    errorMessage.textContent = "Notes must be 200 characters or fewer.";
     return false;
   }
   errorMessage.textContent = "";
