@@ -1,111 +1,55 @@
-// ── Element references ────────────────────────────────────────────────────────
-const loadBtn   = document.getElementById("load-btn");
-const statusEl  = document.getElementById("status");
-const notesList = document.getElementById("notes-list");
-const noteForm  = document.getElementById("note-form");
-const titleInput = document.getElementById("title-input");
+const API_URL = "https://jsonplaceholder.typicode.com/posts";
 
-const API_BASE = "https://jsonplaceholder.typicode.com";
+const loadBtn = document.querySelector("#load-btn");
+const statusText = document.querySelector("#status");
+const list = document.querySelector("#notes-list");
+const form = document.querySelector("#note-form");
+const titleInput = document.querySelector("#title-input");
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-/** Set the #status paragraph text (and optionally a colour hint). */
-function setStatus(message, type = "info") {
-  statusEl.textContent = message;
-  statusEl.style.color =
-    type === "error"   ? "red"   :
-    type === "success" ? "green" :
-    "inherit";
-}
-
-/** Append a single note <li> to #notes-list using textContent (never innerHTML). */
-function appendNote(note) {
+function showNote(note) {
   const li = document.createElement("li");
-
-  const strong = document.createElement("strong");
-  strong.textContent = note.title;
-
-  const small = document.createElement("small");
-  small.textContent = ` — id: ${note.id}`;
-
-  li.appendChild(strong);
-  li.appendChild(small);
-  notesList.appendChild(li);
+  li.textContent = `#${note.id}: ${note.title}`;
+  list.appendChild(li);
 }
 
-// ── Load notes (GET) ──────────────────────────────────────────────────────────
-
-async function loadNotes() {
-  // Disable button and show loading state
+loadBtn.addEventListener("click", async () => {
+  statusText.textContent = "Loading notes...";
   loadBtn.disabled = true;
-  notesList.innerHTML = "";
-  setStatus("Loading notes…");
+  list.innerHTML = "";
 
   try {
-    const response = await fetch(`${API_BASE}/posts?_limit=5`);
-
-    if (!response.ok) {
-      throw new Error(`Server returned ${response.status} ${response.statusText}`);
-    }
-
+    const response = await fetch(`${API_URL}?_limit=5`);
+    if (!response.ok) throw new Error(`Status ${response.status}`);
     const notes = await response.json();
-
-    notes.forEach(appendNote);
-    setStatus(`Loaded ${notes.length} notes from the server.`, "success");
-  } catch (err) {
-    setStatus(`Error: ${err.message}`, "error");
+    notes.forEach(showNote);
+    statusText.textContent = `Loaded ${notes.length} notes.`;
+  } catch (error) {
+    statusText.textContent = "Could not load notes. Please try again.";
+    console.error(error);
   } finally {
-    loadBtn.disabled = false;
+    loadBtn.disabled = false; // runs whether it worked or failed
   }
-}
+});
 
-// ── Create a note (POST) ──────────────────────────────────────────────────────
-
-async function createNote(event) {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
-
   const title = titleInput.value.trim();
-  if (!title) {
-    setStatus("Please enter a title before sending.", "error");
-    return;
-  }
-
-  // Disable form while request is in flight
-  const submitBtn = noteForm.querySelector("button[type='submit']");
-  submitBtn.disabled = true;
-  setStatus("Sending note to server…");
+  if (!title) return;
 
   try {
-    const response = await fetch(`${API_BASE}/posts`, {
+    const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: title,
-        body: "",
-        userId: 1,
-      }),
+      body: JSON.stringify({ title: title, body: "", userId: 1 }),
     });
-
-    if (!response.ok) {
-      throw new Error(`Server returned ${response.status} ${response.statusText}`);
-    }
-
+    if (!response.ok) throw new Error(`Status ${response.status}`);
     const created = await response.json();
-
-    // JSONPlaceholder echoes the new post back with a fake id (101)
-    setStatus(
-      `Note created! Server gave it id: ${created.id} — title: "${created.title}"`,
-      "success"
-    );
-
+    showNote(created);
+    statusText.textContent =
+      `Created note #${created.id} (status ${response.status}).`;
     titleInput.value = "";
-  } catch (err) {
-    setStatus(`Error: ${err.message}`, "error");
-  } finally {
-    submitBtn.disabled = false;
+  } catch (error) {
+    statusText.textContent = "Could not create the note.";
+    console.error(error);
   }
-}
-
-// ── Event listeners ───────────────────────────────────────────────────────────
-loadBtn.addEventListener("click", loadNotes);
-noteForm.addEventListener("submit", createNote);
+});
