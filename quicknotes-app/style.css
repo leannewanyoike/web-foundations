@@ -277,8 +277,15 @@ button:focus-visible {
   margin-bottom: 0;
 }
 
+.notes-header-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
 .search-container {
-  flex: 0 1 260px;
+  flex: 0 1 220px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -286,6 +293,22 @@ button:focus-visible {
 
 .search-label {
   font-size: 0.75rem;
+}
+
+#clear-all-btn {
+  background-color: var(--danger-bg);
+  color: var(--danger-hover);
+  border: 1px solid #fca5a5;
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.875rem;
+  white-space: nowrap;
+  align-self: flex-end;
+}
+
+#clear-all-btn:hover {
+  background-color: #fecaca;
+  border-color: #f87171;
+  color: #991b1b;
 }
 
 .note-count {
@@ -483,9 +506,20 @@ button:focus-visible {
     gap: 0.875rem;
   }
 
+  .notes-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
   .search-container {
     width: 100%;
     flex: 1 1 100%;
+  }
+
+  #clear-all-btn {
+    width: 100%;
+    align-self: stretch;
   }
 
   .note-card,

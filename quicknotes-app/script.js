@@ -6,6 +6,7 @@ const errorMessage = document.querySelector("#error-message");
 const searchInput = document.querySelector("#search-input");
 const noteCount = document.querySelector("#note-count");
 const noteList = document.querySelector("#note-list");
+const clearAllBtn = document.querySelector("#clear-all-btn");
 
 // LocalStorage key
 const STORAGE_KEY = "quicknotes_app_data";
@@ -200,6 +201,19 @@ if (noteForm && noteInput) {
 if (searchInput) {
   searchInput.addEventListener("input", () => {
     render();
+  });
+}
+
+// Bonus: Clear All button — asks for confirmation before deleting every note
+if (clearAllBtn) {
+  clearAllBtn.addEventListener("click", () => {
+    if (notes.length === 0) return;
+    if (confirm("Delete all notes?")) {
+      notes = [];
+      saveNotes();
+      if (searchInput) searchInput.value = "";
+      render();
+    }
   });
 }
 

@@ -53,14 +53,17 @@
         <section class="card-section notes-section" aria-labelledby="notes-heading">
             <div class="notes-header">
                 <h2 id="notes-heading" class="section-title">Your notes</h2>
-                <div class="search-container">
-                    <label for="search-input" class="search-label">Search notes</label>
-                    <input 
-                        type="search" 
-                        id="search-input" 
-                        name="search-input" 
-                        placeholder="Search notes by keyword or category..." 
-                        autocomplete="off">
+                <div class="notes-header-actions">
+                    <div class="search-container">
+                        <label for="search-input" class="search-label">Search notes</label>
+                        <input 
+                            type="search" 
+                            id="search-input" 
+                            name="search-input" 
+                            placeholder="Search notes by keyword..." 
+                            autocomplete="off">
+                    </div>
+                    <button type="button" id="clear-all-btn" aria-label="Delete all notes">Clear All</button>
                 </div>
             </div>
 
