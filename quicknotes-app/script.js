@@ -16,7 +16,7 @@ let notes = loadNotes();
 // Load notes from localStorage using JSON.parse
 function loadNotes() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("quicknotes");
     return saved ? JSON.parse(saved) : [];
   } catch (err) {
     console.error("Error loading notes from localStorage:", err);
@@ -28,6 +28,7 @@ function loadNotes() {
 function saveNotes() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    localStorage.setItem("quicknotes", JSON.stringify(notes));
   } catch (err) {
     console.error("Error saving notes to localStorage:", err);
   }
@@ -83,7 +84,7 @@ function render(notesToRender = getVisibleNotes()) {
     emptyLi.className = "empty-notes-hint";
     const query = searchInput ? searchInput.value.trim() : "";
     emptyLi.textContent = query !== ""
-      ? "No notes found matching your search."
+      ? "No notes match your search."
       : "No notes yet. Add your first note above!";
     noteList.appendChild(emptyLi);
     return;
@@ -141,11 +142,7 @@ function getVisibleNotes() {
   const term = searchInput.value.trim().toLowerCase();
   if (term === "") return notes;
 
-  return notes.filter((note) => {
-    const textMatch = note.text.toLowerCase().includes(term);
-    const categoryMatch = note.category.toLowerCase().includes(term);
-    return textMatch || categoryMatch;
-  });
+  return notes.filter((note) => note.text.toLowerCase().includes(term));
 }
 
 // Add a new note with id, text, category, and createdAt (readable date and time)
