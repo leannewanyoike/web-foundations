@@ -1,5 +1,5 @@
 /* ==========================================================================
-   QuickNotes - Modern Card-Based Design System
+   QuickNotes - Modern Card-Based Design System (Task 2 - Styling)
    ========================================================================== */
 
 :root {
@@ -15,30 +15,28 @@
   --border-color: #e2e8f0;
   --border-focus: #0d9488;
   
-  --danger: #ef4444;
-  --danger-hover: #dc2626;
+  --danger: red;
+  --danger-hover: #b91c1c;
   --danger-bg: #fee2e2;
-  --danger-text: #b91c1c;
   
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
   
-  /* Category Colors */
-  --personal-border: #3b82f6;
-  --personal-bg: #eff6ff;
-  --personal-badge: #dbeafe;
-  --personal-text: #1e40af;
+  /* Category border colors specified in Task 2: Personal = teal, Work = dark red, Study = blue */
+  --personal-color: teal;
+  --personal-bg: #f0fdfa;
+  --personal-badge: #ccfbf1;
+  --personal-badge-text: #115e59;
   
-  --work-border: #f59e0b;
-  --work-bg: #fffbeb;
-  --work-badge: #fef3c7;
-  --work-text: #92400e;
+  --work-color: darkred;
+  --work-bg: #fef2f2;
+  --work-badge: #fee2e2;
+  --work-badge-text: #991b1b;
   
-  --study-border: #10b981;
-  --study-bg: #f0fdf4;
-  --study-badge: #dcfce7;
-  --study-text: #166534;
+  --study-color: blue;
+  --study-bg: #eff6ff;
+  --study-badge: #dbeafe;
+  --study-badge-text: #1e40af;
 }
 
 /* ==========================================================================
@@ -62,11 +60,11 @@ body {
 }
 
 /* ==========================================================================
-   Header & Tagline
+   Coloured Header
    ========================================================================== */
 
 .app-header {
-  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #115e59 100%);
   color: #ffffff;
   padding: 2.25rem 1.5rem;
   box-shadow: var(--shadow-md);
@@ -74,7 +72,7 @@ body {
 }
 
 .header-container {
-  max-width: 680px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -92,12 +90,13 @@ body {
 }
 
 /* ==========================================================================
-   Main Content Layout
+   Centred Main Column (max 700px)
    ========================================================================== */
 
-.app-main {
+.app-main,
+main {
   flex: 1;
-  max-width: 680px;
+  max-width: 700px;
   width: 100%;
   margin: 2rem auto;
   padding: 0 1.25rem;
@@ -106,10 +105,15 @@ body {
   gap: 1.75rem;
 }
 
-.card-section {
-  background-color: var(--card-bg);
+/* ==========================================================================
+   White Section Cards with Rounded Corners
+   ========================================================================== */
+
+.card-section,
+section {
+  background-color: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 1.75rem;
   box-shadow: var(--shadow-md);
 }
@@ -123,7 +127,7 @@ body {
 }
 
 /* ==========================================================================
-   Flexbox Form & Input Controls
+   Flexbox Form
    ========================================================================== */
 
 #note-form {
@@ -230,7 +234,7 @@ button:focus-visible {
 
 .delete-btn {
   background-color: transparent;
-  color: var(--danger-text);
+  color: var(--danger);
   border: 1px solid transparent;
   padding: 0.35rem 0.75rem;
   font-size: 0.8125rem;
@@ -244,11 +248,12 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   Validation Error Message
+   Error Message Styled in Red
    ========================================================================== */
 
+#error-message,
 .error-message {
-  color: var(--danger);
+  color: red;
   font-size: 0.875rem;
   font-weight: 500;
   margin-top: 0.75rem;
@@ -356,52 +361,52 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   Visual Styles for Each Category (Classes)
+   Category Left-Border Colours (category-personal, category-work, category-study)
    ========================================================================== */
 
-/* Personal Category */
+/* Personal = teal */
 .category-personal,
 .personal,
 .note-card.personal,
 .note-card.category-personal {
+  border-left: 5px solid teal;
   background-color: var(--personal-bg);
-  border-left: 5px solid var(--personal-border);
 }
 
 .category-personal .category-badge,
 .personal .category-badge {
   background-color: var(--personal-badge);
-  color: var(--personal-text);
+  color: var(--personal-badge-text);
 }
 
-/* Work Category */
+/* Work = dark red */
 .category-work,
 .work,
 .note-card.work,
 .note-card.category-work {
+  border-left: 5px solid darkred;
   background-color: var(--work-bg);
-  border-left: 5px solid var(--work-border);
 }
 
 .category-work .category-badge,
 .work .category-badge {
   background-color: var(--work-badge);
-  color: var(--work-text);
+  color: var(--work-badge-text);
 }
 
-/* Study Category */
+/* Study = blue */
 .category-study,
 .study,
 .note-card.study,
 .note-card.category-study {
+  border-left: 5px solid blue;
   background-color: var(--study-bg);
-  border-left: 5px solid var(--study-border);
 }
 
 .category-study .category-badge,
 .study .category-badge {
   background-color: var(--study-badge);
-  color: var(--study-text);
+  color: var(--study-badge-text);
 }
 
 /* Empty notes state */
@@ -428,7 +433,7 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   Media Query (Small Screens <= 600px)
+   Screens 600px or narrower: stack form controls vertically
    ========================================================================== */
 
 @media (max-width: 600px) {
@@ -440,22 +445,26 @@ button:focus-visible {
     font-size: 1.75rem;
   }
 
-  .app-main {
+  .app-main,
+  main {
     margin: 1.25rem auto;
     padding: 0 0.875rem;
     gap: 1.25rem;
   }
 
-  .card-section {
+  .card-section,
+  section {
     padding: 1.25rem;
   }
 
+  /* Stack form controls vertically */
   #note-form {
     flex-direction: column;
     align-items: stretch;
     gap: 1rem;
   }
 
+  .form-group,
   .form-group-input,
   .form-group-category,
   .form-actions {

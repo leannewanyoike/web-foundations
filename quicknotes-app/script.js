@@ -155,8 +155,13 @@ function addNote(text, category) {
     return false;
   }
 
+  let id = Date.now();
+  while (notes.some((note) => note.id === id)) {
+    id++;
+  }
+
   const newNote = {
-    id: Date.now(),
+    id: id,
     text: text.trim(),
     category: category || "personal",
     createdAt: new Date().toISOString()
